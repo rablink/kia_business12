@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kia Business 12</title>
+  <!-- Load Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Load Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script>
+   tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        'primary': '#FF69B4', // Hot Pink atau ganti ke #fdb0c0 (Soft Pink)
+        'secondary': '#000000', 
+        'accent': '#000000', 
+        'background': '#ffffff', 
+      },
+      // ... sisanya tetap sama
+
+          keyframes: {
+            pulseShadow: {
+              '0%, 100%': { boxShadow: '0 0 0 0 rgba(34, 197, 94, 0.7)' },
+              '50%': { boxShadow: '0 0 0 12px rgba(34, 197, 94, 0)' },
+            },
+            slideIn: {
+              '0%': { transform: 'translateY(20px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' },
+            },
+            fadeInOut: {
+              '0%, 100%': { opacity: '0' },
+              '10%, 90%': { opacity: '1' },
+            },
+            baraGlow: {
+              '0%': { textShadow: '0 0 3px #660000, 0 0 6px #990000, 0 0 10px #cc3300' },
+              '100%': { textShadow: '0 0 6px #ff0000, 0 0 12px #ff3300, 0 0 18px #ff6600' },
+            },
+            shake: {
+                '0%, 100%': { transform: 'translateX(0)' },
+                '20%, 60%': { transform: 'translateX(-5px)' },
+                '40%, 80%': { transform: 'translateX(5px)' },
+            }
+          },
+          animation: {
+            pulseShadow: 'pulseShadow 2s infinite',
+            slideIn: 'slideIn 0.8s ease-out',
+            fadeInOut: 'fadeInOut 3.5s ease-in-out infinite',
+            baraGlow: 'baraGlow 0.8s infinite alternate',
+            shake: 'shake 0.5s ease-in-out',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+   body {
+  background: linear-gradient(rgba(185, 121, 49, 0), rgba(185, 121, 49, 0)),  
+              url('background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #333;
+  line-height: 1.6;
+  font-family: 'Poppins', sans-serif;
+}
+    .section-title {
+        border-bottom: 3px solid #c94daa;
+        padding-bottom: 8px;
+        display: inline-block;
+        animation: slideIn 1s ease-out;
+    }
+    .testimonial-slider {
+      max-width: 600px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    .slides-wrapper {
+      display: flex;
+      transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+    .slide-item {
+      min-width: 100%;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+    }
+    .floating-chat {
+      position: fixed;
+      bottom: 80px; /* Above the sticky CTA */
+      left: 10px;
+      background-color: #ffffff;
+      color: #333;
+      padding: 10px 14px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      font-size: 0.8rem;
+      display: none;
+      z-index: 9999;
+      max-width: 200px;
+      animation: fadeInOut 5s ease-in-out;
+    }
+    .slot-terbatas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: linear-gradient(45deg, #ff6b6b, #e74c3c);
+      color: white;
+      padding: 10px 40px;
+      font-weight: bold;
+      font-size: 14px;
+      transform: rotate(-45deg) translate(-30px, -30px);
+      transform-origin: top left;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      border: 2px solid white;
+      z-index: 100;
+    }
+    .video-container video {
+        width: 100%;
+        height: auto;
+        max-height: 70vh;
+    }
+    /* Set the glow for the discount text */
+    .bara-glow {
+      animation: baraGlow 0.8s infinite alternate;
+      font-weight: 800;
+      font-size: 2.25rem; /* text-4xl */
+      color: #b91c1c; /* red-700 */
+    }
+    .section-title {
+      font-size: 1rem;
+      margin: 30px 0 20px;
+      color: #000000;
+    }
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 20px;
+      max-width: 3000px;
+      text-align: left;
+    }
+    .countdown-box {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 1rem;
+    }
+    .countdown-item {
+        background-color: #fef3c7; /* yellow-100 */
+        color: #b45309; /* amber-800 */
+        padding: 8px 12px;
+        border-radius: 8px;
+        font-weight: bold;
+        text-align: center;
+        min-width: 60px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .countdown-item span {
+        display: block;
+        font-size: 1.5rem;
+        line-height: 1;
+    }
+    .countdown-item small {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        margin-top: 2px;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen">
+  
+  <!-- Floating Testimonials (Testi Berjalan) -->
+  <div id="chat1" class="floating-chat hidden md:block">💬 “Awalnya ragu, ternyata dibimbing dari nol sampai bisa! -Dinda”</div>
+  <div id="chat2" class="floating-chat hidden md:block">💬 “Dapet bahan promosi lengkap tinggal upload doang!” -Rani</div>
+  <div id="chat3" class="floating-chat hidden md:block">💬 “Cuma modal HP dan kuota udah bisa bisnis online!” -Adit</div>
+  <div id="chat4" class="floating-chat hidden md:block">💬 “Modal kecil, hasil gede. Seriusan ini peluang bagus banget!” -Intan</div>
+  <div id="chat5" class="floating-chat hidden md:block">💬 “Dikasih caption, gambar, video. Tinggal upload aja!” -Surya</div>
+
+  <!-- Header Section -->
+  <header class="bg-primary text-white p-6 shadow-xl relative overflow-hidden rounded-b-xl">
+    <!-- Slot Terbatas Ribbon -->
+   
+    <div class="flex flex-col items-center pt-8 pb-4">
+      <!-- Logo Placeholder -->
+      <img src="490-removebg-preview.png" alt="Logo Brofi Business" class="w-28 h-28 rounded-full  border-secondary animate-bounce" />
+      
+      <h1 class="text-3xl sm:text-4xl font-extrabold mt-4 mb-2 tracking-wide animate-slideIn">
+        WELCOME TO <br><span class="text-accent">kia_business12</span>
+      </h1>
+      
+      <div class="text-center mt-4 p-3 bg-white text-primary rounded-lg shadow-inner">
+        <h2 class="text-lg font-semibold mb-1">Total Member Aktif:</h2>
+        <div id="counter" class="text-4xl font-bold text-secondary">0</div>
+      </div>
+    </div>
+  </header>
+<p style="text-align: center; font-family: 'Poppins', sans-serif; margin-top: 24px; font-size: 16px; color: #333;">
+  Sebelum join, silakan cek juga story dan sorotan di akun 
+  <a href="https://www.instagram.com/kia_business12?igsh=YXdncXdyc3BuMWdk" target="_blank"
+     style="display: inline-block; padding: 6px 14px; margin-left: 8px; background: linear-gradient(135deg, #f58529, #dd2a7b, #8134af); color: #fff; font-weight: 500; border-radius: 8px; text-decoration: none; box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: all 0.3s ease;">
+  AKUN IG RESMI
+  </a>
+</p>
+  <!-- Main Content -->
+  <main class="container mx-auto p-4 space-y-12">
+    <section>
+    <h2 class="text-center bg-white p-6 rounded-xl shadow-lg border-t-4 border-secondary transform hover:scale-[1.01] transition duration-300 animate-slideIn">SUKSES USIA MUDA🏆 KERJA LEWAT HP BISA HASILKAN 100RB-2JUTA/HARI</h2>
+    <div class="bg-white p-6 rounded-xl shadow-lg border-b-4 border-accent text-center transform hover:scale-105 transition duration-300">
+      <div class="card">
+        
+<p >Cape nyari lowongan kerja kesana kemari ???
+Sini yukk  🙌🏻 JOIN BISNIS aku, ga perlu kemana mana, ga perlu keluar rumah bahkan keluar kamar pun ga perlu 🙀
+KERJA CUMAN LEWAT HP 📲 BISA HASILKAN 100k-2Jt/HARI </p>
+<br>
+Hallo 👋🏻👋🏻 perkenalkan saya owner dari @kia_business12 yang akan membimbing kalian untuk mendapatkan 100k-2Jt/hari.
+Silahkan simak penjelasan dibawah ini untuk info lebih lengkap akan dijelaskan setelah FIX JOIN 🙌🏻  </p>
+    </div>
+  </section>
+    <!-- CTA & Promo Section (DITAMBAH COUNTDOWN TIMER) -->
+    <section class="text-center bg-white p-6 rounded-xl shadow-lg border-t-4 border-secondary transform hover:scale-[1.01] transition duration-300 animate-slideIn">
+      <h2 class="section-title text-3xl font-bold text-primary mb-4">
+        🔥 <span class="text-red-600">PROMO</span> Join Hari Ini!
+      </h2>
+      
+      <div class="text-2xl font-medium mb-2">
+        <span class="line-through text-gray-500">Rp350.000</span>
+      </div>
+      <div class="text-red-700 mb-4">
+        <span class="bara-glow">Rp70.000</span>
+      </div>
+      
+      <p class="text-xl font-semibold text-red-600 mb-4 animate-pulse">
+        💥 Diskon 75% hanya tersisa untuk **10 Orang Pertama**!
+      </p>
+
+      <!-- COUNTDOWN TIMER BARU -->
+     <section>
+  <h2 class="section-title">🔥 Promo Spesial Berakhir Dalam:</h2>
+  <div id="countdown" style="font-size: 2rem; font-weight: bold; color: #e63946; margin-top: 10px;"></div>
+  <p style="margin-top: 10px; color: #555;">Jangan sampai kelewatan! Harga akan kembali normal ke <del>Rp350.000</del></p>
+</section>
+      
+      <!-- Main CTA Button -->
+      <a href="https://wa.me/6289524046904" class="inline-block mt-6 px-8 py-4 bg-secondary text-white font-extrabold text-xl rounded-full shadow-2xl hover:bg-green-600 transition duration-300 animate-pulseShadow">
+        ✅ SAYA MAU JOIN SEKARANG!
+      </a>
+    </section>
+    
+    <!-- Manfaat dengan Ikon Baru -->
+    <section class="animate-slideIn">
+      <h2 class="section-title text-2xl font-bold text-primary mb-8">Mengapa Kia Business 12 Pilihan Tepat?</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <div class="bg-white p-6 rounded-xl shadow-lg border-b-4 border-accent text-center transform hover:scale-105 transition duration-300">
+          <i class="fas fa-wallet text-4xl text-accent mb-3 animate-shake"></i>
+          <h3 class="text-xl font-bold text-primary mb-2">Potensi Jutaan</h3>
+          <p class="text-gray-600">Potensi Penghasilan 300rb - 2jt/hari. Modal kembali berlipat ganda.</p>
+        </div>
+        
+        <div class="bg-white p-6 rounded-xl shadow-lg border-b-4 border-accent text-center transform hover:scale-105 transition duration-300">
+          <i class="fas fa-graduation-cap text-4xl text-accent mb-3"></i>
+          <h3 class="text-xl font-bold text-primary mb-2">Bimbingan Seumur Hidup</h3>
+          <p class="text-gray-600">Full bimbingan pusat dan private, diajarkan strategi marketing dari nol sampai sukses.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow-lg border-b-4 border-accent text-center transform hover:scale-105 transition duration-300">
+          <i class="fas fa-home text-4xl text-accent mb-3"></i>
+          <h3 class="text-xl font-bold text-primary mb-2">Kerja Fleksibel</h3>
+          <p class="text-gray-600">Kerja lewat HP, dimanapun dan kapanpun. Tanpa harus keluar rumah.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow-lg border-b-4 border-accent text-center transform hover:scale-105 transition duration-300">
+          <i class="fas fa-star text-4xl text-accent mb-3"></i>
+          <h3 class="text-xl font-bold text-primary mb-2">Tanpa Syarat Sulit</h3>
+          <p class="text-gray-600">Tanpa nunjukin muka, tanpa minimum Followers, tanpa KTP/ATM, dan tanpa target.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow-lg border-b-4 border-accent text-center transform hover:scale-105 transition duration-300">
+          <i class="fas fa-hand-holding-usd text-4xl text-accent mb-3"></i>
+          <h3 class="text-xl font-bold text-primary mb-2">Keuntungan Penuh</h3>
+          <p class="text-gray-600">Semua penghasilan 100% milik kamu sepenuhnya tanpa bagi hasil kepada siapapun.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow-lg border-b-4 border-accent text-center transform hover:scale-105 transition duration-300">
+          <i class="fas fa-certificate text-4xl text-accent mb-3"></i>
+          <h3 class="text-xl font-bold text-primary mb-2">Halal & Legal</h3>
+          <p class="text-gray-600">Bisnis anti Riba, bukan MLM/Money Game. Legalitas resmi tersedia.</p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Bagian Bukti Transfer (TRUST/VALIDASI SOSIAL) -->
+    
+    <!-- Keuntungan Section (Dihapus karena sudah digantikan oleh Manfaat Ikon) -->
+    
+    <!-- Pengertian & Keuntungan Gabung -->
+    <section class="animate-slideIn">
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white p-6 rounded-xl shadow-lg">
+          <h3 class="text-2xl font-bold text-primary mb-4">PENGERTIAN BISNIS</h3>
+          <p class="text-gray-700 mb-4">Bisnis ini bergerak di bidang online, cara kerjanya hanya mengandalkan handphone dan internet saja.</p>
+          <p class="font-semibold text-primary">Cocok untuk pemula yang:</p>
+          <ul class="list-disc list-inside text-gray-700 mt-2 space-y-1">
+            <li>Introvert</li>
+            <li>Belum ada pengalaman (Gaptek)</li>
+            <li>Mager hanya dirumah aja</li>
+          </ul>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow-lg">
+          <h3 class="text-2xl font-bold text-primary mb-4">KEUNTUNGAN GABUNG</h3>
+          <ul class="list-disc list-inside text-gray-700 space-y-2">
+            <li class="font-bold text-secondary">100% balik modal berlipat-lipat.</li>
+            <li>Dibocorkan Tips dan Trik agar bisnis kamu berkembang pesat.</li>
+            <li>Full bimbingan pusat dan private.</li>
+            <li>Bisnis Halal dan terpercaya sejak 2020.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 Bisnis Utama Section -->
+    <section class="animate-slideIn">
+      <h2 class="section-title text-2xl font-bold text-primary mb-6">️️ 2 Bisnis Utama yang Kamu Dapatkan:</h2>
+      <div class="space-y-4">
+        
+        <!-- Bisnis 1: Database -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+          <button class="faq-question w-full p-4 text-left bg-primary text-white font-bold text-lg hover:bg-green-800 transition duration-300 flex justify-between items-center" onclick="toggleFaq(this)">
+            1. DATABASE <span class="transform rotate-0 transition duration-300">▼</span>
+          </button>
+          <div class="faq-answer max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+            <div class="p-4 text-gray-700">
+              <p>DATABASE adalah bisnis yang bergerak di bidang online yang di dalamnya terdapat kontak supplier tangan pertama mulai dari fashion, alat rumah tangga, kpop-stuf, otomotif, dll dengan harga yang sangat murah. Sehingga kamu bisa menjualnya kembali dengan keuntungan yang lebih besar.</p>
+              <p class="mt-2 font-semibold">Intinya, semua fasilitas bisnis termasuk Tips & Trik sukses berbisnis dan semua link kontak supplier (toko) terlengkap langsung dari pabrik tersedia di sini!</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Bisnis 2: Online Shop -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+          <button class="faq-question w-full p-4 text-left bg-primary text-white font-bold text-lg hover:bg-green-800 transition duration-300 flex justify-between items-center" onclick="toggleFaq(this)">
+            2. Online Shop <span class="transform rotate-0 transition duration-300">▼</span>
+          </button>
+          <div class="faq-answer max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+            <div class="p-4 text-gray-700">
+              <p>ONLINE SHOP terbagi menjadi **dropshipper** (menjual tanpa stok) dan **reseller** (menjual dengan stok). Suppliernya sudah disediakan dan sangat lengkap.</p>
+              <p class="mt-2 bg-yellow-50 p-3 rounded-lg border border-yellow-200">
+                **Contoh Potensi:** Harga baju dari supplier Rp10rb. Kamu jual Rp50rb. Keuntungan Rp40rb/item. Jika jual 20pcs/hari: **Rp40rb x 20 = Rp800.000/hari** atau **Rp24 Juta/bulan**!
+              </p>
+              <p class="mt-2">Barang yang dijual seperti sepatu, tas, baju, peralatan rumah tangga, Skincare, make up, dll. **100++ link kontak supplier** tersedia. Jangan takut tidak laku, karena **TIPS TRIK SUKSES** promosi, caption, dan cara jualan sudah disiapkan!</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bisnis 3: Kuota (Placeholder - kept for structure) -->
+        
+    </section>
+
+    <!-- Video Testimoni Section -->
+    <section class="text-center animate-slideIn">
+      <h2 class="section-title text-2xl font-bold text-primary mb-6">📱 Video Singkat Testimoni Full Bimbingan</h2>
+      <div class="flex justify-center">
+        <!-- Placeholder for Mobile Video -->
+        <div class="video-container bg-gray-200 rounded-xl shadow-2xl overflow-hidden">
+             <video controls preload="none" poster="https://placehold.co/320x570/34d399/ffffff?text=VIDEO+TESTIMONI" style="width:100%; height: auto;">
+                <!-- As no external video source is allowed, this remains a visual placeholder -->
+                <source src="video-potrait.mp4" type="video/mp4">
+                Browser kamu tidak mendukung video tag.
+            </video>
+        </div>
+      </div>
+      <p class="mt-4 text-gray-600 italic">Lihat sendiri bagaimana member kami sukses dari nol!</p>
+    </section>
+
+    <!-- Testimonial Slider -->
+    <section class="animate-slideIn">
+      <h2 class="section-title text-2xl font-bold text-primary mb-6">Testimoni Member Sukses</h2>
+      <div class="testimonial-slider bg-white p-4 rounded-xl shadow-xl border border-gray-100">
+        <div class="slides-wrapper" id="testimonial-slides">
+          <!-- Placeholder Images for Testimonials -->
+          <div class="slide-item"><img src="testimoni1.jpg" alt="Testimoni 1" class="w-full max-w-xs h-auto rounded-lg shadow-md" /></div>
+          <div class="slide-item"><img src="testimoni2.jpg" alt="Testimoni 2" class="w-full max-w-xs h-auto rounded-lg shadow-md" /></div>
+          <div class="slide-item"><img src="testimoni3.jpg" alt="Testimoni 3" class="w-full max-w-xs h-auto rounded-lg shadow-md" /></div>
+          <div class="slide-item"><img src="testimoni4.jpg" alt="Testimoni 4" class="w-full max-w-xs h-auto rounded-lg shadow-md" /></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="animate-slideIn">
+      <h2 class="section-title text-2xl font-bold text-primary mb-6">❓ FAQ - Pertanyaan yang Sering Diajukan</h2>
+      <div class="space-y-3" id="faq-list">
+        <!-- FAQ 1 -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
+          <button class="faq-question w-full p-4 text-left bg-gray-50 text-primary font-semibold flex justify-between items-center hover:bg-gray-100 transition duration-200" onclick="toggleFaq(this)">
+            Apa bisnis ini aman dan legal
+            <span class="transform rotate-0 transition duration-300">▼</span>
+          </button>
+          <div class="faq-answer max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+            <div class="p-4 text-gray-700">
+              Ya, bisnis ini memiliki legalitas yang bisa kamu cek langsung melalui <a href="https://docs.google.com/document/d/1P-9LXxF2QNFGvqD9_aUi6izz4EjTG1JEOoY2VucoHcE/edit?usp=drivesdk" target="_blank" class="text-secondary hover:underline font-bold">surat resmi kami di sini</a>. Kami 100% amanah.
+            </div>
+          </div>
+        </div>
+        <!-- FAQ 2 -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
+          <button class="faq-question w-full p-4 text-left bg-gray-50 text-primary font-semibold flex justify-between items-center hover:bg-gray-100 transition duration-200" onclick="toggleFaq(this)">
+            Berapa biaya untuk join? <span class="transform rotate-0 transition duration-300">▼</span>
+          </button>
+          <div class="faq-answer max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+            <div class="p-4 text-gray-700">
+              Harga normal **Rp350K**, tapi saat ini sedang promo hanya **Rp70K** saja! (Hemat 75%). Biaya ini hanya **1x seumur hidup**.
+            </div>
+          </div>
+        </div>
+        <!-- FAQ 3 -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
+          <button class="faq-question w-full p-4 text-left bg-gray-50 text-primary font-semibold flex justify-between items-center hover:bg-gray-100 transition duration-200" onclick="toggleFaq(this)">
+            Bagaimana jika saya pemula atau Gaptek? <span class="transform rotate-0 transition duration-300">▼</span>
+          </button>
+          <div class="faq-answer max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+            <div class="p-4 text-gray-700">
+              Jangan khawatir! Anda akan mendapatkan **full bimbingan** dan pendampingan, mulai dari class bimbingan hingga konsultasi private, sampai Anda benar-benar paham dan sukses.
+            </div>
+          </div>
+        </div>
+        <!-- FAQ 4 -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
+          <button class="faq-question w-full p-4 text-left bg-gray-50 text-primary font-semibold flex justify-between items-center hover:bg-gray-100 transition duration-200" onclick="toggleFaq(this)">
+            Apa ada target dan harus bagi hasil? <span class="transform rotate-0 transition duration-300">▼</span>
+          </button>
+          <div class="faq-answer max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+            <div class="p-4 text-gray-700">
+              Tidak ada target penjualan sama sekali. Anda bebas bekerja sesuai waktu luang Anda. Yang terbaik, **penghasilan 100% milik Anda!** Tidak ada bagi hasil dengan pihak Brofi Business.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="text-center bg-primary p-8 rounded-xl shadow-2xl">
+      <h2 class="text-3xl font-bold text-accent mb-4">🚀 SIAP GABUNG SEKARANG?</h2>
+      <p class="text-white text-lg max-w-xl mx-auto mb-6">
+        Jangan biarkan kesempatan emas ini hilang. Buktikan sendiri potensi penghasilan Anda!
+      </p>
+      <a href="https://api.whatsapp.com/send?phone=6289699988809&text=Halo+admin+saya+mau+join" class="inline-block px-10 py-4 bg-secondary text-primary font-extrabold text-2xl rounded-full shadow-2xl hover:bg-green-400 transition duration-300 animate-pulseShadow">
+        📩 KETIK: FIX JOIN
+      </a>
+      <p class="mt-4 text-sm text-gray-200">Hubungi admin untuk info pembayaran dan fasilitas lengkap.</p>
+    </section>
+
+  </main>
+
+  <!-- Sticky Footer CTA -->
+  <a href="https://api.whatsapp.com/send?phone=6289699988809&text=Halo+admin+saya+mau+join" class="fixed bottom-4 right-4 z-50 px-6 py-3 bg-secondary text-white font-extrabold rounded-full shadow-2xl flex items-center space-x-2 text-lg hover:bg-green-600 transition duration-300 animate-pulseShadow">
+    <span>💬 Chat Admin & Join</span>
+  </a>
+
+  <!-- Footer -->
+  <footer class="bg-primary text-gray-300 text-center p-4 mt-12">
+    <p>&copy; Putri Database. All Rights Reserved.</p>
+    <p>Payment info & lainnya langsung hubungi admin ke WhatsApp.</p>
+  </footer>
+
+  <!-- JavaScript for Interactivity -->
+  <script>
+    // 1. Member Counter Animation
+    let count = 0;
+    let target = 79320;
+    let speed = 2; 
+    let counter = document.getElementById("counter");
+
+    function updateCounter() {
+      if (count < target) {
+        count += Math.floor(Math.random() * 300) + 1;
+        if (count > target) count = target;
+        counter.textContent = count.toLocaleString('id-ID');
+        setTimeout(updateCounter, speed);
+      }
+    }
+    updateCounter();
+
+    // 2. Confetti on Load
+    document.addEventListener("DOMContentLoaded", () => {
+      setTimeout(() => {
+        if (typeof confetti === 'function') {
+          confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.6 }
+          });
+        }
+      }, 1000);
+    });
+
+    // 3. Testimonial Slider
+    let currentIndex = 0;
+    const slides = document.getElementById('testimonial-slides');
+    const totalSlides = slides.children.length;
+
+    setInterval(() => {
+      currentIndex = (currentIndex + 1) % totalSlides;
+      slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }, 3500); // Ganti gambar setiap 3.5 detik
+
+    // 4. Floating Chat Rotation
+    const chats = [
+      document.getElementById("chat1"),
+      document.getElementById("chat2"),
+      document.getElementById("chat3"),
+      document.getElementById("chat4"),
+      document.getElementById("chat5")
+    ];
+    let currentChat = 0;
+
+    function showChat() {
+      chats.forEach((chat, index) => {
+        chat.style.display = index === currentChat ? "block" : "none";
+      });
+      currentChat = (currentChat + 1) % chats.length;
+    }
+
+    showChat(); 
+    setInterval(showChat, 3500); // Ganti setiap 3.5 detik
+
+    // 5. FAQ Toggle (using custom logic to ensure smooth max-height transition)
+    function toggleFaq(button) {
+      const parent = button.closest('.bg-white');
+      const answer = button.nextElementSibling;
+      const arrow = button.querySelector('span');
+      
+      // Check if the FAQ is currently active (expanded)
+      const isActive = answer.style.maxHeight && answer.style.maxHeight !== '0px';
+
+      // Close all other FAQs
+      document.querySelectorAll('.faq-answer').forEach(ans => {
+        ans.style.maxHeight = '0px';
+        ans.previousElementSibling.querySelector('span').style.transform = 'rotate(0deg)';
+      });
+
+      if (!isActive) {
+        // Open the clicked FAQ
+        answer.style.maxHeight = answer.scrollHeight + "px";
+        arrow.style.transform = 'rotate(180deg)';
+      }
+    }
+
+    // 6. Countdown Timer Logic
+    // Set promo duration for 2 hours (in milliseconds)
+   const targetDate = new Date();
+  targetDate.setDate(targetDate.getDate() + 1); // Atur promo berakhir 2 hari dari sekarang
+
+  const countdown = document.getElementById("countdown");
+
+  function updateCountdown() {
+    const now = new Date();
+    const diff = targetDate - now;
+
+    if (diff <= 0) {
+      countdown.textContent = "Promo telah berakhir!";
+      countdown.style.color = "#999";
+      return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hrs = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const mins = Math.floor((diff / (1000 * 60)) % 60);
+    const secs = Math.floor((diff / 1000) % 60);
+
+    countdown.textContent = `${days} hari ${hrs} jam ${mins} menit ${secs} detik`;
+  }
+
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
+  </script>
+</body>
+</html>
